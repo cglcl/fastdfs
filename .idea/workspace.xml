@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3f0edc6c-3a82-4e23-9618-51254ee97eed" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/dictionaries/qbanxiaoli.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="3f0edc6c-3a82-4e23-9618-51254ee97eed" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -185,12 +182,12 @@
       <workItem from="1536414473198" duration="419000" />
       <workItem from="1536414946882" duration="649000" />
       <workItem from="1536415913771" duration="2172000" />
-      <workItem from="1536420826234" duration="2343000" />
+      <workItem from="1536420826234" duration="2971000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="8346000" />
+    <option name="totallyTimeSpent" value="8974000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="48" y="23" width="1804" height="983" extended-state="0" />
