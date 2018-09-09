@@ -7,8 +7,10 @@ services:
         restart: always
         container_name: fastdfs
         environment:
-            # nginx服务端口
-            - WEB_PORT=80
+            # nginx服务端口,默认80端口，可修改
+            - WEB_PORT=8000
+            # tracker_server服务端口，默认22122端口，可修改
+            - FDFS_PORT 8001
             # docker所在主机的IP地址
             - IP=123.207.85.155
         volumes:
