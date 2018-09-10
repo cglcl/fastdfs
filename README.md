@@ -53,3 +53,8 @@ echo "Hello FastDFS!">index.html
 ```
 fdfs_test /etc/fdfs/client.conf upload index.html
 ```      
+
+构建镜像后，也可用如下命令直接运行容器
+```
+docker run -dit --restart=always --privileged=true --net=host --name=fastdfs -e IP=123.207.85.155 -v ${HOME}/fastdfs:/var/local/fdfs registry.cn-hangzhou.aliyuncs.com/qbanxiaoli/fastdfs
+```
