@@ -22,9 +22,11 @@ services:
         restart: always
         container_name: fastdfs
         environment:
-            # nginx服务端口
+            # nginx服务端口,默认80端口，可修改
             - WEB_PORT=80
-            # docker所在主机的IP地址
+            # tracker_server服务端口，默认22122端口，可修改
+            - FDFS_PORT 22122
+            # docker所在主机的IP地址，默认使用eth0网卡的地址
             - IP=123.207.85.155
         volumes:
             # 将本地目录映射到docker容器内的fastdfs数据存储目录，将fastdfs文件存储到主机上，以免每次重建docker容器，之前存储的文件就丢失了。
