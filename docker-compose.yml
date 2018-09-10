@@ -10,7 +10,7 @@ services:
             # nginx服务端口,默认80端口，可修改
             - WEB_PORT=80
             # tracker_server服务端口，默认22122端口，可修改
-            - FDFS_PORT 22122
+            - FDFS_PORT=22122
             # docker所在主机的IP地址，默认使用eth0网卡的地址
             - IP=123.207.85.155
         volumes:
