@@ -1,7 +1,5 @@
 # 使用超小的Linux镜像alpine
-FROM alpine:3.6
-
-MAINTAINER qbanxiaoli <823730820@qq.com>
+FROM alpine
 
 ENV HOME /root
 
