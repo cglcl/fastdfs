@@ -94,7 +94,4 @@ tail -f /usr/local/nginx/logs/access.log \
 ">/start.sh \
 && chmod u+x /start.sh
 
-# 暴露端口。改为采用host网络，不需要单独暴露端口
-#EXPOSE 80 22122
-
 ENTRYPOINT ["/bin/bash","/start.sh"]
