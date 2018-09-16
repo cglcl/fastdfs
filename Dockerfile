@@ -9,20 +9,20 @@ RUN    apk update \
 
 # 下载fastdfs、libfastcommon、nginx插件的源码
 RUN     cd /root \
-        && curl -fSL https://github.com/happyfish100/libfastcommon/archive/V1.0.39.tar.gz -o fastcommon.tar.gz \
-        && curl -fSL https://github.com/happyfish100/fastdfs/archive/V5.11.tar.gz -o fastfs.tar.gz \
-        && curl -fSL https://github.com/happyfish100/fastdfs-nginx-module/archive/V1.20.tar.gz -o nginx-module.tar.gz \
+        && curl -fSL https://github.com/happyfish100/libfastcommon/archive/master.tar.gz -o fastcommon.tar.gz \
+        && curl -fSL https://github.com/happyfish100/fastdfs/archive/master.tar.gz -o fastfs.tar.gz \
+        && curl -fSL https://github.com/happyfish100/fastdfs-nginx-module/archive/master.tar.gz -o nginx-module.tar.gz \
         && tar zxf fastcommon.tar.gz \
         && tar zxf fastfs.tar.gz \
         && tar zxf nginx-module.tar.gz
 
 # 安装libfastcommon
-RUN     cd ${HOME}/libfastcommon-1.0.39/ \
+RUN     cd ${HOME}/libfastcommon-master/ \
         && ./make.sh \
         && ./make.sh install
 
 # 安装fastdfs
-RUN     cd ${HOME}/fastdfs-5.11/ \
+RUN     cd ${HOME}/fastdfs-master/ \
         && ./make.sh \
         && ./make.sh install
 
@@ -31,24 +31,24 @@ RUN     cd /etc/fdfs/ \
         && cp storage.conf.sample storage.conf \
         && cp tracker.conf.sample tracker.conf \
         && cp client.conf.sample client.conf \
-        && sed -i "s|/home/fastdfs|/var/local/fdfs/tracker|g" /etc/fdfs/tracker.conf \
-        && sed -i "s|/home/fastdfs|/var/local/fdfs/storage|g" /etc/fdfs/storage.conf \
-        && sed -i "s|/home/fastdfs|/var/local/fdfs/storage|g" /etc/fdfs/client.conf
+        && sed -i "s|/home/yuqing/fastdfs|/var/local/fdfs/tracker|g" /etc/fdfs/tracker.conf \
+        && sed -i "s|/home/yuqing/fastdfs|/var/local/fdfs/storage|g" /etc/fdfs/storage.conf \
+        && sed -i "s|/home/yuqing/fastdfs|/var/local/fdfs/storage|g" /etc/fdfs/client.conf
 
 # 获取nginx源码，与fastdfs插件一起编译
 RUN     cd ${HOME} \
-        && curl -fSL http://nginx.org/download/nginx-1.9.9.tar.gz -o nginx-1.9.9.tar.gz \
-        && tar zxf nginx-1.9.9.tar.gz \
-        && chmod u+x ${HOME}/fastdfs-nginx-module-1.20/src \
-        && cd nginx-1.9.9 \
-        && ./configure --add-module=${HOME}/fastdfs-nginx-module-1.20/src \
+        && curl -fSL http://nginx.org/download/nginx-1.13.6.tar.gz -o nginx-1.13.6.tar.gz \
+        && tar zxf nginx-1.13.6.tar.gz \
+        && chmod u+x ${HOME}/fastdfs-nginx-module-master/src/config \
+        && cd nginx-1.13.6 \
+        && ./configure --add-module=${HOME}/fastdfs-nginx-module-master/src \
         && make && make install
 
 # 设置nginx和fastdfs联合环境，并配置nginx
-RUN     cp ${HOME}/fastdfs-nginx-module-1.20/src/mod_fastdfs.conf /etc/fdfs/ \
+RUN     cp ${HOME}/fastdfs-nginx-module-master/src/mod_fastdfs.conf /etc/fdfs/ \
         && sed -i "s|^store_path0.*$|store_path0=/var/local/fdfs/storage|g" /etc/fdfs/mod_fastdfs.conf \
         && sed -i "s|^url_have_group_name =.*$|url_have_group_name = true|g" /etc/fdfs/mod_fastdfs.conf \
-        && cd ${HOME}/fastdfs-5.11/conf/ \
+        && cd ${HOME}/fastdfs-master/conf/ \
         && cp http.conf mime.types anti-steal.jpg /etc/fdfs/ \
         && echo -e "\
            events {\n\
