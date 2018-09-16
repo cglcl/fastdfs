@@ -7,16 +7,17 @@ ENV HOME /root
 RUN    apk update \
         && apk add --no-cache --virtual .build-deps bash gcc libc-dev make openssl-dev pcre-dev zlib-dev linux-headers curl gnupg libxslt-dev gd-dev geoip-dev
 
-# 复制工具
-ADD soft ${HOME}
-
-RUN     cd ${HOME} \
-        && tar zxf libfastcommon-1.0.38.tar.gz \
-        && tar zxf fastdfs-5.11.tar.gz \
-        && tar zxf fastdfs-nginx-module-1.20.tar.gz
+# 下载fastdfs、libfastcommon、nginx插件的源码
+RUN     cd /root \
+        && curl -fSL https://github.com/happyfish100/libfastcommon/archive/V1.0.39.tar.gz -o fastcommon.tar.gz \
+        && curl -fSL https://github.com/happyfish100/fastdfs/archive/V5.11.tar.gz -o fastfs.tar.gz \
+        && curl -fSL https://github.com/happyfish100/fastdfs-nginx-module/archive/V1.20.tar.gz -o nginx-module.tar.gz \
+        && tar zxf fastcommon.tar.gz \
+        && tar zxf fastfs.tar.gz \
+        && tar zxf nginx-module.tar.gz
 
 # 安装libfastcommon
-RUN     cd ${HOME}/libfastcommon-1.0.38/ \
+RUN     cd ${HOME}/libfastcommon-1.0.39/ \
         && ./make.sh \
         && ./make.sh install
 
@@ -36,9 +37,10 @@ RUN     cd /etc/fdfs/ \
 
 # 获取nginx源码，与fastdfs插件一起编译
 RUN     cd ${HOME} \
-        && tar zxf nginx-1.13.6.tar.gz \
-        && chmod u+x ${HOME}/fastdfs-nginx-module-1.20/src/config \
-        && cd nginx-1.13.6 \
+        && curl -fSL http://nginx.org/download/nginx-1.9.9.tar.gz -o nginx-1.9.9.tar.gz \
+        && tar zxf nginx-1.9.9.tar.gz \
+        && chmod u+x ${HOME}/fastdfs-nginx-module-1.20/src \
+        && cd nginx-1.9.9 \
         && ./configure --add-module=${HOME}/fastdfs-nginx-module-1.20/src \
         && make && make install
 
