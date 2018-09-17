@@ -37,10 +37,10 @@ RUN     cd /etc/fdfs/ \
 
 # 获取nginx源码，与fastdfs插件一起编译
 RUN     cd ${HOME} \
-        && curl -fSL http://nginx.org/download/nginx-1.13.6.tar.gz -o nginx-1.13.6.tar.gz \
-        && tar zxf nginx-1.13.6.tar.gz \
+        && curl -fSL http://nginx.org/download/nginx-1.13.12.tar.gz -o nginx-1.13.12.tar.gz \
+        && tar zxf nginx-1.13.12.tar.gz \
         && chmod u+x ${HOME}/fastdfs-nginx-module-master/src/config \
-        && cd nginx-1.13.6 \
+        && cd nginx-1.13.12 \
         && ./configure --add-module=${HOME}/fastdfs-nginx-module-master/src \
         && make && make install
 
