@@ -16,7 +16,7 @@
 services:
     fastdfs:
         build: .
-        image: registry.cn-hangzhou.aliyuncs.com/qbanxiaoli/fastdfs
+        image: qbanxiaoli/fastdfs
         # 该容器是否需要开机启动+自动重启。若需要，则取消注释。
         restart: always
         container_name: fastdfs
@@ -53,7 +53,10 @@ echo "Hello FastDFS!">index.html
 fdfs_test /etc/fdfs/client.conf upload index.html
 ```      
 
-构建镜像后，也可用如下命令直接运行容器
+该镜像已经上传到docker hub，也可用如下命令拉取镜像后直接运行容器
 ```
-docker run -d --restart=always --privileged=true --net=host --name=fastdfs -e IP=123.207.85.155 -v ${HOME}/fastdfs:/var/local/fdfs registry.cn-hangzhou.aliyuncs.com/qbanxiaoli/fastdfs
+docker pull qbanxiaoli/fastdfs
+```
+```
+docker run -d --restart=always --privileged=true --net=host --name=fastdfs -e IP=123.207.85.155 -v ${HOME}/fastdfs:/var/local/fdfs qbanxiaoli/fastdfs
 ```
